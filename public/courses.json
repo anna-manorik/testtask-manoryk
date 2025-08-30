@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "React для початківців",
+    "description": "Вивчи основи React та створення інтерактивних UI.",
+    "videoUrl": {
+      "mp4": "react.mp4",
+      "hls": "https://example.com/videos/react_intro.m3u8"
+    },
+    "price": 49.99
+  },
+  {
+    "id": 2,
+    "title": "TypeScript з нуля",
+    "description": "Навчись писати безпечний і типізований код на TypeScript.",
+    "videoUrl": {
+      "mp4": "react2.mp4",
+      "hls": "https://example.com/videos/ts_basics.m3u8"
+    },
+    "price": 59.99
+  },
+  {
+    "id": 3,
+    "title": "Advanced React Patterns",
+    "description": "Покращуй свої навички React, використовуючи сучасні патерни.",
+    "videoUrl": {
+      "mp4": "react.mp4",
+      "hls": "https://example.com/videos/react_advanced.m3u8"
+    },
+    "price": 79.99
+  },
+  {
+    "id": 4,
+    "title": "Frontend з Tailwind CSS",
+    "description": "Створюй красиві та адаптивні UI швидко за допомогою Tailwind CSS.",
+    "videoUrl": {
+      "mp4": "react.mp4",
+      "hls": "https://example.com/videos/tailwind.m3u8"
+    },
+    "price": 39.99
+  },
+  {
+    "id": 5,
+    "title": "Повний курс JavaScript",
+    "description": "Від основ до продвинутих тем: все, що потрібно знати про JS.",
+    "videoUrl": {
+      "mp4": "react.mp4",
+      "hls": "https://example.com/videos/js_full.m3u8"
+    },
+    "price": 69.99
+  }
+]

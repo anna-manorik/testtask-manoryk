@@ -1,0 +1,72 @@
+.buy-btn {
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: #1ca926;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 5px 0 7px;
+}
+
+.buy-btn:hover {
+  background: #e64c56;
+  border: none;
+}
+
+.course-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 250px;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.course-title, .course-description {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.course-price {
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.course-video {
+  max-width: 500px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.course-modal {
+    position: absolute;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    padding: 40px;
+    border-radius: 30px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}

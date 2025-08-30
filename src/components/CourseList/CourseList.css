@@ -1,0 +1,45 @@
+.course-card {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.cards-list {
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cart-badge {
+  position: relative;
+      top: -11px;
+    right: -32px;
+
+
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.cart-div {
+    position: relative;
+    width: 60px;
+}

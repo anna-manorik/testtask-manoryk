@@ -1,0 +1,115 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-message {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  max-width: 400px;
+  width: 100%;
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.input-field {
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  padding: 0 10px;
+  /* background: #fff; */
+  border: 1px solid #000;
+  outline: none;  
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 20px;
+  top: 45%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  outline: none;  
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  outline: none;  
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.login-btn,
+.logout-btn {
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: #1ca926;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 5px 0 7px
+}
+
+.logout-btn {
+  padding: 5px 10px 7px;
+  margin-left: 10px;
+}
+
+.login-btn:hover,
+.logout-btn:hover {
+  background: #fde047;
+  border: none;
+}
+
+.logout-btn:disabled {
+  background: #ccc;
+  border-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.signup-link {
+  color: #fff;
+  text-decoration: underline;
+  font-size: 20px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #0a610e;
+  text-decoration: none
+}
+
+.courses-link {
+  color: #fff;
+  text-decoration: underline;
+  font-size: 24px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #2029ad;
+  text-decoration: none;
+  margin: 10px;
+}
