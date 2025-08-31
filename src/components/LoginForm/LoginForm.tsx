@@ -74,7 +74,7 @@ const LoginForm = () => {
                       as="input" 
                       name="username" 
                       type="email" 
-                      placeholder="Login" 
+                      placeholder="Enter your Email" 
                       className="input-field" 
                     />
                     <ErrorMessage name="login" component="div" className="error-text" />

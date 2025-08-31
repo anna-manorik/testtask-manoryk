@@ -33,6 +33,7 @@
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .course-price {
@@ -45,6 +46,7 @@
   max-width: 500px;
   border-radius: 8px;
   margin-bottom: 12px;
+  cursor: pointer;
 }
 
 .course-modal {

@@ -19,7 +19,9 @@ const initialValues = {
 
 const validationSchema = Yup.object({
     username: Yup.string()
-      .required('*required'),
+      .required('*required')
+      .trim()
+      .email('Невалідний email (наприклад, name@example.com)'),
     password: Yup.string()
       .min(6, 'min 6 symbols')
       .required('*required')
@@ -69,7 +71,7 @@ const SignupForm = () => {
                       as="input" 
                       name="username" 
                       type="text" 
-                      placeholder="Username" 
+                      placeholder="Enter your Email" 
                       className="input-field" 
                     />
                     <ErrorMessage name="username" component="div" className="error-text" />

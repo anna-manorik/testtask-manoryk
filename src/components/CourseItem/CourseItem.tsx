@@ -2,11 +2,12 @@ import type { CourseProps } from '../../types/TypesProps'
 import "./CourseItem.css";
 import ReactVideo from '../../react.mp4';
 import ReactVideo2 from '../../react2.mp4';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../redux/store';
 import { addItem, setCurrentTime, setPlayState } from '../../redux/slice';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import debounce from "lodash/debounce";
 
 const videosMap: Record<string, string> = {
   "react.mp4": ReactVideo,
@@ -28,7 +29,7 @@ const CourseItem = ({ id, title, description, videoUrl, price }: CourseProps) =>
                 videoRef.current.play();
             }
         }
-    }, [id]);
+    }, [id, openModal]);
 
     const handlePurchase = (courseId: number | undefined) => {
         try {
@@ -44,6 +45,12 @@ const CourseItem = ({ id, title, description, videoUrl, price }: CourseProps) =>
         setOpenModal(true);
     };
 
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        dispatch(setPlayState({ id, isPlaying: false }));
+        
+    };
+
     const handlePlay = () => {
         dispatch(setPlayState({ id, isPlaying: true }));
     };
@@ -52,32 +59,36 @@ const CourseItem = ({ id, title, description, videoUrl, price }: CourseProps) =>
         dispatch(setPlayState({ id, isPlaying: false }));
     };
 
+    const debouncedSave = useMemo(
+        () =>
+        debounce((time: number) => {
+            dispatch(setCurrentTime({ id, currentTime: time }));
+        }, 2000),
+        [dispatch, id]
+    );
+
     const handleTimeUpdate = () => {
         if (videoRef.current) {
-            const now = Date.now();
-            if (now - lastUpdate > 2000) {
-                dispatch(setCurrentTime({ id, currentTime: videoRef.current.currentTime }));
-                lastUpdate = now;
-            }
+            debouncedSave(videoRef.current.currentTime);
         }
     };
 
     return (
         <>
            <div key={id} className='course-card'>
-                 <p className="course-title">{title}</p>
-                 {videoUrl && (<video onClick={() => handleOpenModal({ id, title, description, videoUrl, price })} className="course-video" controls ref={videoRef} onPlay={handlePlay} onPause={handlePause} onTimeUpdate={handleTimeUpdate}>
+                 <p className="course-title" onClick={() => handleOpenModal({ id, title, description, videoUrl, price })}>{title}</p>
+                 {videoUrl && (<video onClick={() => handleOpenModal({ id, title, description, videoUrl, price })} className="course-video">
                     <source src={videosMap[videoUrl.mp4 ?? "default.mp4"]} type="video/mp4" />
                  </video>)}
                  <p className="course-price">{price} $</p>
                  <button className='buy-btn' onClick={() => handlePurchase(id)}>BUY IT</button>
             </div>
             {openModal 
-                && <div className='modal-overlay' onClick={() => setOpenModal(false)}>
+                && <div className='modal-overlay' onClick={() => handleCloseModal()}>
                     <div key={selectedCourse?.id} className='course-modal'>
                         <p className="course-title">{selectedCourse?.title}</p>
                         <p className="course-description">{selectedCourse?.description}</p>
-                        {videoUrl && (<video onClick={() => setOpenModal(true)} className="course-video" controls >
+                        {videoUrl && (<video onClick={() => setOpenModal(true)} className="course-video" controls  ref={videoRef} onPlay={handlePlay} onPause={handlePause} onTimeUpdate={handleTimeUpdate}>
                             <source src={videosMap[selectedCourse?.videoUrl.mp4 ?? "default.mp4"]} type="video/mp4" />
                         </video>)}
                         <p className="course-price">{selectedCourse?.price} $</p>
