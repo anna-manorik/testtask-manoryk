@@ -28,3 +28,11 @@ export type CartItem = {
 export type CartState = {
     items: CartItem[];
 };
+
+
+export type VideoState = {
+  [id: number]: {
+    isPlaying: boolean;
+    currentTime: number;
+  }
+}

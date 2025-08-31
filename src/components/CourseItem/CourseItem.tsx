@@ -2,10 +2,10 @@ import type { CourseProps } from '../../types/TypesProps'
 import "./CourseItem.css";
 import ReactVideo from '../../react.mp4';
 import ReactVideo2 from '../../react2.mp4';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import type { AppDispatch } from '../../redux/store';
-import { addItem } from '../../redux/slice';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../../redux/store';
+import { addItem, setCurrentTime, setPlayState } from '../../redux/slice';
 import { toast, ToastContainer } from 'react-toastify';
 
 const videosMap: Record<string, string> = {
@@ -17,6 +17,18 @@ const CourseItem = ({ id, title, description, videoUrl, price }: CourseProps) =>
     const [openModal, setOpenModal] = useState(false)
     const [selectedCourse, setSelectedCourse] = useState<CourseProps>();
     const dispatch = useDispatch<AppDispatch>();
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const videoState = useSelector((state: RootState) => id && state.video[id]);
+    let lastUpdate = Date.now();
+
+     useEffect(() => {
+        if (videoRef.current && videoState) {
+            videoRef.current.currentTime = videoState.currentTime;
+            if (videoState.isPlaying) {
+                videoRef.current.play();
+            }
+        }
+    }, [id]);
 
     const handlePurchase = (courseId: number | undefined) => {
         try {
@@ -32,11 +44,29 @@ const CourseItem = ({ id, title, description, videoUrl, price }: CourseProps) =>
         setOpenModal(true);
     };
 
+    const handlePlay = () => {
+        dispatch(setPlayState({ id, isPlaying: true }));
+    };
+
+    const handlePause = () => {
+        dispatch(setPlayState({ id, isPlaying: false }));
+    };
+
+    const handleTimeUpdate = () => {
+        if (videoRef.current) {
+            const now = Date.now();
+            if (now - lastUpdate > 2000) {
+                dispatch(setCurrentTime({ id, currentTime: videoRef.current.currentTime }));
+                lastUpdate = now;
+            }
+        }
+    };
+
     return (
         <>
            <div key={id} className='course-card'>
                  <p className="course-title">{title}</p>
-                 {videoUrl && (<video onClick={() => handleOpenModal({ id, title, description, videoUrl, price })} className="course-video" controls >
+                 {videoUrl && (<video onClick={() => handleOpenModal({ id, title, description, videoUrl, price })} className="course-video" controls ref={videoRef} onPlay={handlePlay} onPause={handlePause} onTimeUpdate={handleTimeUpdate}>
                     <source src={videosMap[videoUrl.mp4 ?? "default.mp4"]} type="video/mp4" />
                  </video>)}
                  <p className="course-price">{price} $</p>

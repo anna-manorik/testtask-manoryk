@@ -21,7 +21,7 @@ const CourseList = ({ courseList }: CourseListProps) => {
             </div>
             
             <div className='cards-list'>
-                {courseList.map(course => (<CourseItem {...course} />))}
+                {courseList.map(course => (<CourseItem key={course.id} {...course} />))}
             </div>
         </>
     )
