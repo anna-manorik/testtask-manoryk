@@ -6,7 +6,6 @@ import type { AuthUser } from '../../types/TypesProps.tsx';
 import { Link } from 'react-router-dom';
 import "./LoginForm.css"; 
 
-
 const validationSchema = Yup.object({
     username: Yup.string()
       .email('invalid email')
